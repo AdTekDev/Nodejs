@@ -1,31 +1,19 @@
 const  express = require("express");
-const PORT = process.env.port || 80;
-const appServer = express();
+const PORT = process.env.port || 8080;
+const appServerX = express();
 const router = express.Router();
 const fs = require("fs");
 
 // ------------------- Routing
-router.get( "/" , (yeucau, trave) => {
+router.get( "/" , (req, res) => {
     pageContent = "Hello, chua co gi !!!";
-    trave.send(pageContent);
-});
-
-router.get( "/home" , (yeucau, trave) => {
-    data = fs.readFileSync("./html/home.html");
-    pageContent = data.toString();
-    trave.send(pageContent);
-});
-
-router.get( "/products" , (yeucau, trave) => {
-    data = fs.readFileSync("./html/products.html");
-    pageContent = data.toString();
-    trave.send(pageContent);
+    res.send(pageContent);
 });
 
 
 // -------------------------
-appServer.use("/", router);
+appServerX.use("/", router);
 // ----------- RUN / Launching !!! 
-appServer.listen( PORT );
+appServerX.listen( PORT );
 
 console.log("Web da mo tai " + PORT);
