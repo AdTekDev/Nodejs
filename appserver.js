@@ -7,6 +7,9 @@ const fs = require("fs");
 // Middleware
 const bodyParser = require("body-parser");
 
+// Config
+appServer.use(express.static("public"));
+
 
 // ------------------- Middleware - kiem soat tinh huong
 router.use( (yeucau, trave, ketiep) => { 
