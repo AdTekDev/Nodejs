@@ -33,14 +33,6 @@ router.get( "/home" , (yeucau, trave) => {
     trave.send(pageContent);
 });
 
-router.get( "/login" , (yeucau, trave) => {
-    data = fs.readFileSync("./html/login.html");
-    pageContent = data.toString();
-    trave.send(pageContent);
-});
-
-
-
 
 //--- Add middleware
 //const session = express.session();
@@ -52,9 +44,10 @@ appServer.use(bodyParser.json());
 appServer.use("/", router);
 
 const ProductRouter = require("./controller/productController").ProductRouter;
-
 appServer.use("/products", ProductRouter);
 
+const LoginRouter = require("./controller/loginController").LoginRouter;
+appServer.use("/login", LoginRouter);
 
 // ----------- RUN / Launching !!! 
 appServer.listen( PORT );
