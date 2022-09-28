@@ -3,9 +3,15 @@ const PORT = process.env.PORT || 80;
 const appServer = express();
 const router = express.Router();
 const fs = require("fs");
+const path = require('path');
 
 // Middleware
 const bodyParser = require("body-parser");
+// ---- 
+//view engine setup
+appServer.set("views", path.join(__dirname, "view")); //setting views directory for views.
+appServer.set("view engine", "hbs"); //setting view engine as handlebars
+
 
 // Config
 appServer.use(express.static("public"));
@@ -25,15 +31,11 @@ router.use( (loixayra, yeucau, trave, ketiep) => {
 
 // ------------------- Routing
 router.get( "/" , (yeucau, trave) => {
-    data = fs.readFileSync("./html/main.html");
-    pageContent = data.toString();
-    trave.send(pageContent);
+    trave.render("main", {TenTrang: "Main Chinh !!!"} );
 });
 
 router.get( "/home" , (yeucau, trave) => {
-    data = fs.readFileSync("./html/home.html");
-    pageContent = data.toString();
-    trave.send(pageContent);
+    trave.render("home", {TenTrang: "Home Nha !!!"});
 });
 
 
