@@ -16,6 +16,22 @@ appServer.set("view engine", "hbs"); //setting view engine as handlebars
 // Config
 appServer.use(express.static("public"));
 
+///// -------------------Database
+const mongoose = require('mongoose');
+
+const accUN = "user202210";
+const accPW = "d3Z2x7JQEzUcdeDJ";
+const dnsServer = "cluster0.s7ukh.mongodb.net";
+const dbName = "Shop_2022_10";
+
+const uri = "mongodb+srv://"
++ accUN + ":" + accPW
++ "@" + dnsServer + "/" + dbName + "?retryWrites=true&w=majority";
+
+const db = mongoose.connect(uri, { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true, 
+});
 
 // ------------------- Middleware - kiem soat tinh huong
 router.use( (yeucau, trave, ketiep) => { 
