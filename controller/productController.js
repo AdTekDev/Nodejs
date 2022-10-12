@@ -17,6 +17,17 @@ async function productHome(yeucau, trave) {
     }
 }
 
+router.get( "/create" , (yeucau, trave) => {
+    trave.render("newproduct");
+});
+
+router.post( "/create" , (yeucau, trave) => {
+    console.log("\n BODY: ", yeucau.body);
+    console.log("\n Params: ", yeucau.params);
+    console.log("\n Query: ", yeucau.query);
+    trave.render("oneproduct");
+});
+
 router.get( "/giadung" , (yeucau, trave) => {
     pageContent = "Hang Gia Dung !!!";
     trave.send(pageContent);
