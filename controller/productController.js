@@ -25,6 +25,9 @@ router.post( "/create" , (yeucau, trave) => {
     console.log("\n BODY: ", yeucau.body);
     console.log("\n Params: ", yeucau.params);
     console.log("\n Query: ", yeucau.query);
+
+    oneproduct = new Product(yeucau.body);
+    oneproduct.save();
     trave.render("oneproduct");
 });
 
