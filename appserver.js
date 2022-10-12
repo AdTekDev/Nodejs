@@ -58,6 +58,7 @@ router.get( "/home" , (yeucau, trave) => {
 //--- Add middleware
 //const session = express.session();
 appServer.use(bodyParser.json());
+appServer.use(bodyParser.urlencoded({ extended: true }));
 //appServer.use(session({secret: "id-session-Mr.Tu"​}));
 
 
