@@ -2,14 +2,20 @@ const  express = require("express");
 const  router = express.Router();
 const fs = require("fs");
 
+////// - Model
+const Product = require("../model/Product");
+
 //-------------------------------------------
-router.get( "/" , (yeucau, trave) => {
-    dssanpham = [
-        {TenSach: "Nguoi cung kho", MoTa: "Kho cung nguoi"},
-        {TenSach: "Than so hoc", MoTa: "So hoc than"},
-    ];
-    trave.render("products", {CacSanPham: dssanpham});
-});
+router.get( "/" , productHome);
+async function productHome(yeucau, trave) {
+    try {
+        let dssp = await Product.find({});
+        console.log(dssp);
+        trave.render("products", {CacSanPham: dssp});
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 router.get( "/giadung" , (yeucau, trave) => {
     pageContent = "Hang Gia Dung !!!";
