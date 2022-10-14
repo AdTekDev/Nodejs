@@ -28,7 +28,22 @@ router.post( "/create" , (yeucau, trave) => {
 
     oneproduct = new Product(yeucau.body);
     oneproduct.save();
-    trave.render("oneproduct");
+    trave.render("oneproduct",  {sanpham: yeucau.body});
+});
+
+router.get( "/view/:MaSP" , async (yeucau, trave) => {
+    console.log("\n BODY: ", yeucau.body);
+    console.log("\n Params: ", yeucau.params);
+    console.log("\n Query: ", yeucau.query);
+
+    try {
+        let sp = await Product.findOne({ MaSP: yeucau.params.MaSP });
+        console.log(sp);
+        trave.render("oneproduct", {sanpham: sp});
+    } catch (error) {
+        console.log(error);
+    }
+
 });
 
 router.get( "/giadung" , (yeucau, trave) => {
