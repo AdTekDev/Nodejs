@@ -5,6 +5,19 @@ const fs = require("fs");
 ////// - Model
 const Product = require("../model/Product");
 
+// Upload - https://www.npmjs.com/package/multer 
+
+const multer = require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/images')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + '-' + file.originalname)
+    }
+  });
+const upload = multer({ storage: storage });
+
 //-------------------------------------------
 router.get( "/" , productHome);
 async function productHome(yeucau, trave) {
@@ -21,11 +34,13 @@ router.get( "/create" , (yeucau, trave) => {
     trave.render("newproduct");
 });
 
-router.post( "/create" , (yeucau, trave) => {
+router.post( "/create" , upload.single("myFile"), (yeucau, trave, ketiep) => {
     console.log("\n BODY: ", yeucau.body);
     console.log("\n Params: ", yeucau.params);
     console.log("\n Query: ", yeucau.query);
+    console.log("\n File: ", yeucau.file);
 
+    yeucau.body.ImageLink = "/images/" + yeucau.file.filename;
     oneproduct = new Product(yeucau.body);
     oneproduct.save();
     trave.render("oneproduct",  {sanpham: yeucau.body});
